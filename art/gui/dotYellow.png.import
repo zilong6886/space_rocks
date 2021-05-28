@@ -3,12 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/dotYellow.png-b7c26e48f9cf0dd070e5e6763a39ab99.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://art/gui/dotYellow.png"
+dest_files=[ "res://.import/dotYellow.png-b7c26e48f9cf0dd070e5e6763a39ab99.stex" ]
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=false
@@ -18,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

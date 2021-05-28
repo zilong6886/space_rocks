@@ -4,6 +4,11 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/shield_down.wav-a0310d76ddfde03801bd4ae18cc47095.sample"
 
+[deps]
+
+source_file="res://audio/shield_down.wav"
+dest_files=[ "res://.import/shield_down.wav-a0310d76ddfde03801bd4ae18cc47095.sample" ]
+
 [params]
 
 force/8_bit=false

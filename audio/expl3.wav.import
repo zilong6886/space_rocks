@@ -4,6 +4,11 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/expl3.wav-3b94f6071c523514ed578c85e74fd322.sample"
 
+[deps]
+
+source_file="res://audio/expl3.wav"
+dest_files=[ "res://.import/expl3.wav-3b94f6071c523514ed578c85e74fd322.sample" ]
+
 [params]
 
 force/8_bit=false

@@ -4,6 +4,11 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/enemy_torpedo.wav-a3c6d76ce3bcdcd62d55d87c910e29d6.sample"
 
+[deps]
+
+source_file="res://audio/enemy_torpedo.wav"
+dest_files=[ "res://.import/enemy_torpedo.wav-a3c6d76ce3bcdcd62d55d87c910e29d6.sample" ]
+
 [params]
 
 force/8_bit=false

@@ -4,6 +4,11 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/laser1.wav-c1c7d91ff13f9890c2cc702595885852.sample"
 
+[deps]
+
+source_file="res://audio/laser1.wav"
+dest_files=[ "res://.import/laser1.wav-c1c7d91ff13f9890c2cc702595885852.sample" ]
+
 [params]
 
 force/8_bit=false
