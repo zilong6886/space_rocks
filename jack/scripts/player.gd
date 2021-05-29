@@ -5,6 +5,13 @@ export var thrust = 500
 export var max_vel = 400
 export var friction = 0.65
 
+#onready var bullet = preload("res://scenes/player_bullet.tscn")
+export(PackedScene) var bullet
+onready var bullet_container = $bullet_container
+
+onready var nuzzle = $nuzzle
+onready var gun_timer = $gun_timer
+
 var screen_size = Vector2.ZERO
 var vel = Vector2.ZERO
 var acc = Vector2.ZERO
@@ -15,6 +22,10 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
+	if Input.is_action_pressed("PLAYER_SHOOT"):
+		if gun_timer.get_time_left() == 0:
+			shoot()
+	
 	if Input.is_action_pressed("PLAYER_LEFT"):
 		rotation -= rot_speed * delta
 	if Input.is_action_pressed("PLAYER_RIGHT"):
@@ -37,3 +48,9 @@ func _process(delta):
 	if position.y < 0:
 		position.y = screen_size.y
 		
+func shoot():
+	var b = bullet.instance()
+	bullet_container.add_child(b)
+	b.start_at(rotation, nuzzle.get_global_position())
+	gun_timer.start()
+
