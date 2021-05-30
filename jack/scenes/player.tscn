@@ -52,3 +52,5 @@ texture = ExtResource( 5 )
 position = Vector2( 0, 36.8111 )
 frames = SubResource( 2 )
 playing = true
+
+[connection signal="body_entered" from="." to="." method="_on_player_body_entered"]

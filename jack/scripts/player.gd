@@ -16,6 +16,8 @@ onready var exhaust = $exhaust
 var screen_size = Vector2.ZERO
 var vel = Vector2.ZERO
 var acc = Vector2.ZERO
+var shield_level = globals.shield_max
+var shield_up = true
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -23,6 +25,13 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
+	if shield_up:
+		shield_level = min(shield_level + globals.shield_regen, 100)
+	if shield_level <= 0 and shield_up:
+		shield_up = false
+		shield_level = 0
+		$shield.hide()
+	
 	if Input.is_action_pressed("PLAYER_SHOOT"):
 		if gun_timer.get_time_left() == 0:
 			shoot()
@@ -58,3 +67,12 @@ func shoot():
 	gun_timer.start()
 	shoot_sounds.play()
 
+
+
+func _on_player_body_entered(body):
+	if body.is_in_group("asteroids"):
+		if shield_up:
+			body.explode(vel)
+			shield_level -= globals.ast_damage[body.size]
+		else:
+			globals.game_over = true
