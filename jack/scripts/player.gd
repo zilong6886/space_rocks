@@ -1,5 +1,7 @@
 extends Area2D
 
+signal explode
+
 export var rot_speed = 2.6
 export var thrust = 500
 export var max_vel = 400
@@ -66,13 +68,18 @@ func shoot():
 	b.start_at(rotation, nuzzle.get_global_position())
 	gun_timer.start()
 	shoot_sounds.play()
-
-
+	
+func disable():
+	hide()
+	set_process(false)
 
 func _on_player_body_entered(body):
+	if not visible:
+		return
+		
 	if body.is_in_group("asteroids"):
 		if shield_up:
 			body.explode(vel)
 			shield_level -= globals.ast_damage[body.size]
 		else:
-			globals.game_over = true
+			emit_signal("explode")
