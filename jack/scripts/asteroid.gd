@@ -3,6 +3,9 @@ extends KinematicBody2D
 export var bounce = 1.1
 onready var puff = $puff
 
+signal explode
+
+var size
 var vel = Vector2()
 var rot_speed
 var extents
@@ -29,14 +32,22 @@ var textures = {
 }
 
 func _ready():
+	add_to_group("asteroids")
 	randomize()
 	set_physics_process(true)
-	vel = Vector2(rand_range(30, 100), 0).rotated(rand_range(0, 2 * PI))
-	rot_speed = rand_range(-1.5, 1.5)
-	screen_size = get_viewport_rect().size
-	init('med', screen_size / 2)
+	
+	screen_size = get_viewport_rect().size	
 
-func init(size, pos):
+func init(init_size, init_pos, init_vel):
+	size = init_size
+	
+	if init_vel.length() > 0:
+		vel = init_vel
+	else:
+		vel = Vector2(rand_range(30, 100), 0).rotated(rand_range(0, 2 * PI))
+	
+	rot_speed = rand_range(-1.5, 1.5)
+	
 	var texture = load(textures[size][randi() % textures[size].size()])
 	$sprite.set_texture(texture)
 	extents = texture.get_size() / 2
@@ -45,9 +56,10 @@ func init(size, pos):
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
 	add_child(collision)
-	position = pos
+	position = init_pos
 	
 func _physics_process(delta):
+	vel = vel.clamped(300)
 	rotation = rotation + rot_speed * delta
 	var collision = move_and_collide(vel * delta)
 	
@@ -66,4 +78,7 @@ func _physics_process(delta):
 		position.y = -extents.y
 	if position.y < -extents.y:
 		position.y = screen_size.y + extents.y
-	
+		
+func explode(hit_vel):
+	emit_signal("explode", size, position, vel, hit_vel)
+	queue_free()	

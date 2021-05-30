@@ -1,11 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/sheet.playerShip2_orange.atlastex" type="Texture" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player_bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/laser1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/art/sheet.shield3.atlastex" type="Texture" id=5]
+[ext_resource path="res://assets/art/sheet.fire15.atlastex" type="Texture" id=6]
+[ext_resource path="res://assets/art/sheet.fire11.atlastex" type="Texture" id=7]
+[ext_resource path="res://assets/art/sheet.fire14.atlastex" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.5527
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="player" type="Area2D"]
 script = ExtResource( 2 )
@@ -27,3 +40,15 @@ position = Vector2( 0, -46.379 )
 [node name="gun_timer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="shoot_sounds" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="shield" type="Sprite" parent="."]
+scale = Vector2( 0.522586, 0.52231 )
+texture = ExtResource( 5 )
+
+[node name="exhaust" type="AnimatedSprite" parent="."]
+position = Vector2( 0, 36.8111 )
+frames = SubResource( 2 )
+playing = true

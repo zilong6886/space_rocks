@@ -8,9 +8,10 @@ export var friction = 0.65
 #onready var bullet = preload("res://scenes/player_bullet.tscn")
 export(PackedScene) var bullet
 onready var bullet_container = $bullet_container
-
+onready var shoot_sounds = $shoot_sounds
 onready var nuzzle = $nuzzle
 onready var gun_timer = $gun_timer
+onready var exhaust = $exhaust
 
 var screen_size = Vector2.ZERO
 var vel = Vector2.ZERO
@@ -33,8 +34,10 @@ func _process(delta):
 		
 	if Input.is_action_pressed("PLAYER_THRUST"):
 		acc = Vector2(thrust, 0).rotated(rotation - PI/2)
+		exhaust.show()
 	else:
 		acc = Vector2.ZERO	
+		exhaust.hide()
 	acc += vel * -friction #Them friction vao de ship cham dan lai
 	
 	vel += acc * delta
@@ -53,4 +56,5 @@ func shoot():
 	bullet_container.add_child(b)
 	b.start_at(rotation, nuzzle.get_global_position())
 	gun_timer.start()
+	shoot_sounds.play()
 

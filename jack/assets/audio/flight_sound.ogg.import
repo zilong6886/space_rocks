@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/flight_sound.ogg-a37c829fe0d4e42b3f80a1fd591f9bf6.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/flight_sound.ogg"
+dest_files=[ "res://.import/flight_sound.ogg-a37c829fe0d4e42b3f80a1fd591f9bf6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
