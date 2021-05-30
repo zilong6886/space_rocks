@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/art/gui/barHorizontal_green_mid 200.png" type="Texture" id=1]
-[ext_resource path="res://assets/fonts/KenVector Future.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/HUD.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=3]
 
-[sub_resource type="DynamicFont" id=1]
-size = 48
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.509804 )
 
 [node name="HUD" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 3 )
 
 [node name="score" type="Label" parent="."]
@@ -16,7 +16,7 @@ margin_left = 460.0
 margin_top = 18.0
 margin_right = 610.0
 margin_bottom = 129.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "0
 "
 align = 1
@@ -35,3 +35,38 @@ texture_progress = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="message" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+text = "Message here"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="message_timer" type="Timer" parent="."]
+pause_mode = 1
+wait_time = 3.0
+one_shot = true
+
+[node name="pause_popup" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pause_text" type="Label" parent="pause_popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 2 )
+text = "PAUSED"
+align = 1
+valign = 1
+
+[connection signal="timeout" from="message_timer" to="." method="_on_message_timer_timeout"]

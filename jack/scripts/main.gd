@@ -14,13 +14,18 @@ var explosion = preload("res://scenes/explosion.tscn")
 func _ready():	
 	set_process(true)
 	$music.play()
+	begin_next_level()
+	
+func begin_next_level():
+	globals.level += 1
+	HUD.show_message("Wave %s" % globals.level)
+	for i in range(globals.level):
+		spawn_asteroid("big", spawns.get_child(i).position, Vector2.ZERO)
 	
 func _process(delta):
 	HUD.update(player)
 	if asteroid_container.get_child_count() == 0:
-		globals.level += 1
-		for i in range(globals.level):
-			spawn_asteroid("big", spawns.get_child(i).position, Vector2.ZERO)		
+		begin_next_level()
 
 func spawn_asteroid(size, pos, vel):
 	var a = asteroid.instance()
